@@ -11,7 +11,7 @@ by default it runs c/cpp , py ,js and java
 you need to activate it by `ctrl + shift + p` then type `Run Code`. The file openned will run in termainal. You can also click the status bar item named
 `⯈ Run Code`.
 
-<!-- ![USAGE EXAMPLE](media\usage.gif) -->
+![USAGE EXAMPLE](media/usage.gif)
 
 ## Example Configuration
 
