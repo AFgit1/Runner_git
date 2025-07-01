@@ -75,6 +75,11 @@ To use custom commands, users can add them to `settings.json` like this:
       "language": "dart",
       "commandWindows": "dart run '${filePath}'",
       "commandLinux": "dart run '${filePath}'"
+    },
+    {
+      "language": "mk",
+      "commandWindows": "cd /d ${directoryPath} && make -f '${fileName}'",
+      "commandLinux": "cd ${directoryPath} && make -f '${fileName}'"
     }
   ]
 }
@@ -100,7 +105,7 @@ for windows :
 }
 ``` 
 # What's new ? 
-- OS detection and sepicifiying command for each system, whether Windows or Linux/MacOS
+- You can now build entire projects with Codium Runner using custom Makefiles! 🔨 Streamline your workflow, automate tasks, and enhance efficiency. Get started today! 🎉
 
 # Prebuilt VSIX file 
 [Runner V1.2.3](/runner-1.2.3.vsix)
