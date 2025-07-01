@@ -52,42 +52,50 @@ export function activate(context: vscode.ExtensionContext) {
         } else {
           command = (customCommand.commandLinux) ? customCommand.commandLinux : '';
         }
-      if (command) {
-        command = command.replaceAll('${filePath}', filePath);
-        command = command.replaceAll('${directoryPath}', directoryPath);
-        command = command.replaceAll('${executableName}', executableName);
-        command = command.replaceAll('${fileName}', fileName);
+        if (command) {
+          command = command.replaceAll('${filePath}', filePath);
+          command = command.replaceAll('${directoryPath}', directoryPath);
+          command = command.replaceAll('${executableName}', executableName);
+          command = command.replaceAll('${fileName}', fileName);
 
-        //command = customCommand.command.replace('${file}', filePath).replace('${fileBasenameNoExtension}', executableName).replace('${fileBasenameNoExtension}', executableName);
-      } 
-    } else {
-        // Fallback to default commands
-        switch (fileExt) {
-          case 'js':
-            command = `node ${filePath}`;
-            break;
-          case 'py':
-            command = platform === 'win32' ? `python ${filePath}` : `python3 ${filePath}`;
-            break;
-          case 'c':
-            command = platform === 'win32'
-              ? `gcc ${filePath} -o ${directoryPath}\\${executableName} && ${directoryPath}\\${executableName}`
-              : `gcc ${filePath} -o ${directoryPath}/${executableName} && ${directoryPath}/${executableName}`;
-            break;
-          case 'cpp':
-            command = platform === 'win32'
-              ? `g++ ${filePath} -o ${directoryPath}\\${executableName} && ${directoryPath}\\${executableName}`
-              : `g++ ${filePath} -o ${directoryPath}/${executableName} && ${directoryPath}/${executableName}`;
-            break;
-          case 'java':
-            command = platform === 'win32'
-            ? `cd /d "${directoryPath}" && javac "${fileName}" && java "${executableName}"`
-            : `cd ${directoryPath} && javac ${fileName} && java ${executableName}`;
-            break;
-          default:
-            vscode.window.showErrorMessage('Unsupported file type');
-            return;
+          //command = customCommand.command.replace('${file}', filePath).replace('${fileBasenameNoExtension}', executableName).replace('${fileBasenameNoExtension}', executableName);
         }
+      } else {
+        // Fallback to default commands
+        if (fileName == "Makefile" || fileName == "makefile") {
+          command = platform === 'win32'
+            ? `cd /d "${directoryPath}" && make`
+            : `cd "${directoryPath}" && make`;
+        }
+        else {
+          switch (fileExt) {
+            case 'js':
+              command = `node ${filePath}`;
+              break;
+            case 'py':
+              command = platform === 'win32' ? `python ${filePath}` : `python3 ${filePath}`;
+              break;
+            case 'c':
+              command = platform === 'win32'
+                ? `gcc ${filePath} -o ${directoryPath}\\${executableName} && ${directoryPath}\\${executableName}`
+                : `gcc ${filePath} -o ${directoryPath}/${executableName} && ${directoryPath}/${executableName}`;
+              break;
+            case 'cpp':
+              command = platform === 'win32'
+                ? `g++ ${filePath} -o ${directoryPath}\\${executableName} && ${directoryPath}\\${executableName}`
+                : `g++ ${filePath} -o ${directoryPath}/${executableName} && ${directoryPath}/${executableName}`;
+              break;
+            case 'java':
+              command = platform === 'win32'
+                ? `cd /d "${directoryPath}" && javac "${fileName}" && java "${executableName}"`
+                : `cd ${directoryPath} && javac ${fileName} && java ${executableName}`;
+              break;
+            default:
+              vscode.window.showErrorMessage('Unsupported file type');
+              return;
+          }
+        }
+
       }
 
       if (command) {
@@ -100,13 +108,13 @@ export function activate(context: vscode.ExtensionContext) {
             cwd: vscode.workspace.workspaceFolders?.[0]?.uri.fsPath // Set the working directory to the workspace root
           });
           terminalMap.set(filePath, terminal);
-            // Remove terminal from map when it's closed
-            terminal.processId.then(() => {
-              vscode.window.onDidCloseTerminal((closedTerminal) => {
-                  if (closedTerminal === terminal) {
-                      terminalMap.delete(filePath);
-                  }
-              });
+          // Remove terminal from map when it's closed
+          terminal.processId.then(() => {
+            vscode.window.onDidCloseTerminal((closedTerminal) => {
+              if (closedTerminal === terminal) {
+                terminalMap.delete(filePath);
+              }
+            });
           });
         }
 
