@@ -107,3 +107,6 @@ for windows :
 # What's new ?
 
 - You can now build entire project 🚀 with Codium Runner using custom Makefiles! 🔨 Streamline your workflow, automate tasks, and enhance efficiency. Get started today! 🎉
+
+# Prebuilt VSIX file 
+[Runner V1.2.6](/runner-1.2.6.vsix)
