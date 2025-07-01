@@ -79,31 +79,38 @@ function activate(context) {
             }
             else {
                 // Fallback to default commands
-                switch (fileExt) {
-                    case 'js':
-                        command = `node ${filePath}`;
-                        break;
-                    case 'py':
-                        command = platform === 'win32' ? `python ${filePath}` : `python3 ${filePath}`;
-                        break;
-                    case 'c':
-                        command = platform === 'win32'
-                            ? `gcc ${filePath} -o ${directoryPath}\\${executableName} && ${directoryPath}\\${executableName}`
-                            : `gcc ${filePath} -o ${directoryPath}/${executableName} && ${directoryPath}/${executableName}`;
-                        break;
-                    case 'cpp':
-                        command = platform === 'win32'
-                            ? `g++ ${filePath} -o ${directoryPath}\\${executableName} && ${directoryPath}\\${executableName}`
-                            : `g++ ${filePath} -o ${directoryPath}/${executableName} && ${directoryPath}/${executableName}`;
-                        break;
-                    case 'java':
-                        command = platform === 'win32'
-                            ? `cd /d "${directoryPath}" && javac "${fileName}" && java "${executableName}"`
-                            : `cd ${directoryPath} && javac ${fileName} && java ${executableName}`;
-                        break;
-                    default:
-                        vscode.window.showErrorMessage('Unsupported file type');
-                        return;
+                if (fileName == "Makefile" || fileName == "makefile") {
+                    command = platform === 'win32'
+                        ? `cd /d "${directoryPath}" && make`
+                        : `cd "${directoryPath}" && make`;
+                }
+                else {
+                    switch (fileExt) {
+                        case 'js':
+                            command = `node ${filePath}`;
+                            break;
+                        case 'py':
+                            command = platform === 'win32' ? `python ${filePath}` : `python3 ${filePath}`;
+                            break;
+                        case 'c':
+                            command = platform === 'win32'
+                                ? `gcc ${filePath} -o ${directoryPath}\\${executableName} && ${directoryPath}\\${executableName}`
+                                : `gcc ${filePath} -o ${directoryPath}/${executableName} && ${directoryPath}/${executableName}`;
+                            break;
+                        case 'cpp':
+                            command = platform === 'win32'
+                                ? `g++ ${filePath} -o ${directoryPath}\\${executableName} && ${directoryPath}\\${executableName}`
+                                : `g++ ${filePath} -o ${directoryPath}/${executableName} && ${directoryPath}/${executableName}`;
+                            break;
+                        case 'java':
+                            command = platform === 'win32'
+                                ? `cd /d "${directoryPath}" && javac "${fileName}" && java "${executableName}"`
+                                : `cd ${directoryPath} && javac ${fileName} && java ${executableName}`;
+                            break;
+                        default:
+                            vscode.window.showErrorMessage('Unsupported file type');
+                            return;
+                    }
                 }
             }
             if (command) {
