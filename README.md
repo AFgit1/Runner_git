@@ -1,17 +1,15 @@
-# Runner README
+# Codium Runner README
 
-It simply runs code in termainal
+It simply runs code in terminal. 💻  
+You can customize commands as you like from `settings.json` ⚙️.  
+By default it runs C/C++ ➕, Python 🐍, JS 📜 , Java ☕ and Makefiles✨.
 
-you can customize commands as you like from settings.json
-
-by default it runs c/cpp , py ,js and java
-
-## usage
+## Usage
 
 you need to activate it by `ctrl + shift + p` then type `Run Code`. The file openned will run in termainal. You can also click the status bar item named
 `⯈ Run Code`.
 
-![USAGE EXAMPLE](media/usage.gif)
+![Usage Example](https://raw.githubusercontent.com/AFgit1/Runner_git/refs/heads/main/media/usage.gif)
 
 ## Example Configuration
 
@@ -29,7 +27,7 @@ To use custom commands, users can add them to `settings.json` like this:
     },
     {
       "language": "cpp",
-      "commandWindows": "echo Runner on Windows!! && g++ \"${filePath}\" -o \"${directoryPath}/${executableName}\" && \"${directoryPath}/${executableName}\"",
+      "commandWindows": "g++ \"${filePath}\" -o \"${directoryPath}/${executableName}\" && \"${directoryPath}/${executableName}\"",
       "commandLinux": "g++ ${filePath} -o ${directoryPath}/${executableName} && ${directoryPath}/${executableName}"
     },
     {
@@ -59,8 +57,8 @@ To use custom commands, users can add them to `settings.json` like this:
     },
     {
       "language": "m",
-      "commandWindows": "octave '${filePath}'",
-      "commandLinux": "octave '${filePath}'"
+      "commandWindows": "cd /d ${directoryPath} && octave ${fileName}",
+      "commandLinux": "cd ${directoryPath} && octave ${fileName}"
     },
     {
       "language": "sh",
@@ -68,12 +66,12 @@ To use custom commands, users can add them to `settings.json` like this:
     },
     {
       "language": "html",
-      "commandWindows": "firefox '${filePath}'",
+      "commandWindows": "firefox.exe '${filePath}'",
       "commandLinux": "firefox '${filePath}'"
     },
     {
       "language": "dart",
-      "commandWindows": "dart run '${filePath}'",
+      "commandWindows": "cd /d ${directoryPath} && d:\\sources\\dart-sdk\\bin\\dart.exe run ${fileName}",
       "commandLinux": "dart run '${filePath}'"
     },
     {
@@ -87,25 +85,25 @@ To use custom commands, users can add them to `settings.json` like this:
 
 ### **Keywords of `settings.json`**
 
-- `${filePath}` : full file name with its path, eg: `~/Documents/CodeFolder/app.c` 
+- `${filePath}` : full file name with its path, eg: `~/Documents/CodeFolder/app.c`
 - `${directoryPath}` : parent directory path, eg: `~/Documents/CodeFolder`
 - `${fileName}` : file name only, eg: `app.c`
 - `${executableName}` : file name only without the extention, eg: `app`
 
-
-# Notes:
+# Notes :
 
 for windows :
- + Change command foe java to be `cd /d {Path}` instead of `cd {Path}` so it can change drives.
- + Make `default terminal` to be `command prompt` from VsCode settings
+
+- Change command for java to be `cd /d {Path}` instead of `cd {Path}` so it can change drives.
+- Make `default terminal` to be `command prompt` from VsCode settings
+
 ```json
 {
   "language": "java",
   "command": "cd /d '${directoryPath}' && javac ${fileName} && java ${executableName}"
 }
-``` 
-# What's new ? 
-- You can now build entire projects with Codium Runner using custom Makefiles! 🔨 Streamline your workflow, automate tasks, and enhance efficiency. Get started today! 🎉
+```
 
-# Prebuilt VSIX file 
-[Runner V1.2.3](/runner-1.2.3.vsix)
+# What's new ?
+
+- You can now build entire project 🚀 with Codium Runner using custom Makefiles! 🔨 Streamline your workflow, automate tasks, and enhance efficiency. Get started today! 🎉

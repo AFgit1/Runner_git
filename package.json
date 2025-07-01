@@ -1,6 +1,15 @@
 {
-  "name": "runner",
-  "displayName": "Runner",
+  "name": "codium-runner",
+  "displayName": "Codium Runner",
+  "author": {
+    "name": "AF"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AFgit1/Runner_git/tree/main"
+  },
+
   "description": "runs code in terminal with customizable commands",
   "version": "1.2.6",
   "engines": {
@@ -9,10 +18,8 @@
   "categories": [
     "Other"
   ],
-  "icon": "media\\logo.png",
-  "activationEvents": [
-    "onStartupFinished"
-  ],
+  "icon": "media/logo.png",
+  "activationEvents": ["onStartupFinished"],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -32,23 +39,24 @@
       ]
     }
   },
+
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
+    "lint": "eslint src",
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.7",
-    "@types/node": "20.x",
     "@types/vscode": "^1.50.0",
-    "@typescript-eslint/eslint-plugin": "^7.14.1",
-    "@typescript-eslint/parser": "^7.11.0",
-    "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0",
-    "eslint": "^8.57.0",
-    "typescript": "^5.4.5"
+    "@types/mocha": "^10.0.8",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "eslint": "^9.11.1",
+    "typescript": "^5.6.2",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
   }
 }
